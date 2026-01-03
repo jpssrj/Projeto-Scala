@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+}
+
+body {
+    background-image: url(assets/bg-theme-blue.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-clip: border-box;
+}
+
+#container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#container-children {
+    width: 1115px;
+    height: 433px;
+    border-radius: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;;
+    backdrop-filter: blur(50px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sp1 {
+    font-size: 36px;
+    font-weight: normal;
+}
+
+#content-container-children h1 {
+    font-size: 128px;
+    margin-bottom: 50px;
+    line-height: 0.8;
+}
+
+.sp2 {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: normal
+}
+
+#content-container-children h2 {
+    font-size: 48px;
+    line-height: 0.8;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#hub-btn {
+    position: fixed;
+    bottom: 32px;
+
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+#hub-btn ion-icon {
+    font-size: 24px;
+    color: #000;
+}
+
+.logo-iasd img{
+    position: fixed;
+    top: 32px;
+    width: 56px;
+    height: 56px;
+
+    left: 50%;
+    transform: translateX(-50%);
+    
+    cursor: pointer;
+}
