@@ -3,6 +3,14 @@ const express = require("express"); //Importa o express
 const app = express(); //Cria o servidor
 const PORT = 3000; //Porta
 
+app.use((req, res, next) => { //Autorização do front acessar o back e sem os erros de policy -.-  
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
+
 app.use(express.json()); //Necessário para ler os json enviados
 
 let hubData = { //Variável global do servidor para guardar e alterar dados

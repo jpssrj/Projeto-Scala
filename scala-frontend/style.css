@@ -34,7 +34,7 @@ body {
     align-items: center;
 }
 
-.sp1 {
+.atual {
     font-size: 36px;
     font-weight: normal;
 }
@@ -45,7 +45,7 @@ body {
     line-height: 0.8;
 }
 
-.sp2 {
+.proximo {
     font-size: 24px;
     color: rgba(0, 0, 0, 0.5);
     font-weight: normal
@@ -55,6 +55,7 @@ body {
     font-size: 48px;
     line-height: 0.8;
     color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 16px;
 }
 
 /* Esconde o checkbox */
