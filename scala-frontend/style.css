@@ -150,3 +150,21 @@ body {
     
     cursor: pointer;
 }
+
+/* Status do servidor */
+
+#server-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#server-status.online {
+  color: #2ecc71; 
+}
+
+#server-status.offline {
+  color: #e74c3c; 
+}
