@@ -37,4 +37,30 @@ function avancar() {
     });
 }
 
+function salvarCulto() {
+  const texto = document.getElementById("programa").value;
+
+  const momentos = texto
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l !== "");
+
+  fetch("http://localhost:3000/culto", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ momentos })
+  })
+    .then(res => res.json())
+    .then(() => {
+      alert("Programa do culto salvo com sucesso!");
+      carregar();
+    })
+    .catch(() => {
+      alert("Erro ao salvar o culto");
+    });
+}
+
+
 carregar();
