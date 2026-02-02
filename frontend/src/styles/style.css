@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+}
+
+body {
+    background-image: url(assets/bg-theme-blue.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-clip: border-box;
+}
+
+#container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#container-children {
+    width: 1115px;
+    height: 433px;
+    border-radius: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;;
+    backdrop-filter: blur(50px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.atual {
+    font-size: 36px;
+    font-weight: normal;
+}
+
+#content-container-children h1 {
+    font-size: 128px;
+    margin-bottom: 50px;
+    line-height: 0.8;
+}
+
+.proximo {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: normal
+}
+
+#content-container-children h2 {
+    font-size: 48px;
+    line-height: 0.8;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 16px;
+}
+
+/* Esconde o checkbox */
+#hub-toggle {
+    display: none;
+}
+
+/* Botão principal */
+#hub-btn {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+#hub-btn ion-icon {
+    font-size: 26px;
+}
+
+/* Overlay */
+#hub-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1000;
+}
+
+/* Radial */
+#hub-menu {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 14px;
+
+    display: flex;
+    gap: 10px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Botões */
+#hub-menu a {
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 16px;
+    border-radius: 16px;
+    display: inline-block;
+}
+
+#hub-menu a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Quando estiver aberto */
+#hub-toggle:checked ~ #hub-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+#hub-toggle:checked ~ #hub-overlay {
+    display: block;
+}
+
+.logo-iasd img{
+    position: fixed;
+    top: 32px;
+    width: 56px;
+    height: 56px;
+
+    left: 50%;
+    transform: translateX(-50%);
+    
+    cursor: pointer;
+}
+
+/* Status do servidor */
+
+#server-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#server-status.online {
+  color: #2ecc71; 
+}
+
+#server-status.offline {
+  color: #e74c3c; 
+}
