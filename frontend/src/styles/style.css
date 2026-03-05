@@ -28,27 +28,22 @@ body {
     border-radius: 50px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;;
     backdrop-filter: blur(50px);
+    padding: 0 80px;
+    box-sizing: border-box;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.atual {
-    font-size: 36px;
-    font-weight: normal;
+#content-container-children {
+    width: 100%;
 }
 
 #content-container-children h1 {
-    font-size: 128px;
+    font-size: 100px;
     margin-bottom: 50px;
     line-height: 0.8;
-}
-
-.proximo {
-    font-size: 24px;
-    color: rgba(0, 0, 0, 0.5);
-    font-weight: normal
 }
 
 #content-container-children h2 {
@@ -56,6 +51,24 @@ body {
     line-height: 0.8;
     color: rgba(0, 0, 0, 0.5);
     margin-bottom: 16px;
+}
+
+#atual {
+    font-size: 24px;
+    font-weight: normal;
+    display: block;
+}
+
+#proximo {
+    font-size: 20px;
+    font-weight: normal;
+    display: block;
+}
+
+#terceiro {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: normal
 }
 
 /* Esconde o checkbox */
@@ -72,6 +85,7 @@ body {
     width: 56px;
     height: 56px;
     border-radius: 50%;
+    border: none; /* ← Remove borda padrão de botão */
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -115,28 +129,39 @@ body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
 
-/* Botões */
-#hub-menu a {
+/* Botões e Links */
+#hub-menu a,
+#hub-menu button {
     text-decoration: none;
     color: inherit;
     padding: 12px 16px;
     border-radius: 16px;
     display: inline-block;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-#hub-menu a:hover {
+#hub-menu a:hover,
+#hub-menu button:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
-/* Quando estiver aberto */
-#hub-toggle:checked ~ #hub-menu {
+/* Quando estiver aberto (via classe JS) */
+#hub-menu.open {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
 }
 
-#hub-toggle:checked ~ #hub-overlay {
-    display: block;
+#hub-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    /* Display e backgroundColor manipulados no JS/React quando renderizado,
+       mas mantemos a base aqui */
+    background: transparent;
 }
 
 .logo-iasd img{
@@ -167,4 +192,35 @@ body {
 
 #server-status.offline {
   color: #e74c3c; 
+}
+
+/* ------------------------------------- */
+/* Animação estilo iOS para troca de texto */
+/* ------------------------------------- */
+.transition-text {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.transition-text.text-exit {
+  opacity: 0;
+  transform: translateY(-15px); /* Desliza para cima enquanto some */
+}
+
+/* Quando entra o texto novo, usa keyframe para vir de baixo e não voltar rápido */
+.transition-text.text-enter {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeSlideUpEnter 0.3s ease forwards;
+}
+
+@keyframes fadeSlideUpEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(15px); /* Vem de baixo */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

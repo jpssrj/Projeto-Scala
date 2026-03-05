@@ -63,3 +63,12 @@ app.post("/avancar", (req, res) => {
 
   res.json({ ok: true });
 });
+
+// Volta o momento
+app.post("/voltar", (req, res) => {
+  if (indexAtual > 0) {
+    indexAtual--;
+  }
+
+  res.json({ ok: true });
+});

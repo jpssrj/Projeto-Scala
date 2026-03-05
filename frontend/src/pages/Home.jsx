@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TransitionText from "../components/TransitionText";
 
 export default function Home() {
   const [atual, setAtual] = useState("...");
@@ -7,6 +8,8 @@ export default function Home() {
   const [terceiro, setTerceiro] = useState("...");
   const [online, setOnline] = useState(false);
   const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   function autoAtt() {
     fetch("http://localhost:3000/hub")
@@ -37,32 +40,31 @@ export default function Home() {
         <div id="container-children">
           <div id="content-container-children">
             <span id="atual">Atualmente:</span>
-            <h1 id="atual-nome">{atual}</h1>
+            <TransitionText as="h1" id="atual-nome" text={atual} />
 
             <span id="proximo">Próximo será:</span>
-            <h2 id="proximo-nome">{proximo}</h2>
+            <TransitionText as="h2" id="proximo-nome" text={proximo} />
 
             <span id="terceiro">Próximo então:</span>
-            <h2 id="terceiro-nome">{terceiro}</h2>
+            <TransitionText as="h2" id="terceiro-nome" text={terceiro} />
           </div>
         </div>
 
-        {/* Radial Menu */}
-        <input type="checkbox" id="hub-toggle" />
-
-        <label htmlFor="hub-toggle" id="hub-btn">
+        {/* Radial Menu Controlado por React */}
+        <button id="hub-btn" onClick={() => setMenuOpen(!menuOpen)}>
           <ion-icon name="menu-outline"></ion-icon>
-        </label>
+        </button>
 
         {/* Overlay */}
-        <label htmlFor="hub-toggle" id="hub-overlay"></label>
+        {menuOpen && (
+          <div id="hub-overlay" onClick={() => setMenuOpen(false)}></div>
+        )}
 
         {/* Menu */}
-        <div id="hub-menu">
+        <div id="hub-menu" className={menuOpen ? "open" : ""}>
           <a href="#">Configurações</a>
           <a href="#">Conectar</a>
           <button onClick={() => navigate("/admin")}>Painel ADM</button>
-
         </div>
 
         {/* Logo IASD */}
