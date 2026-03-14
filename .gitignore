@@ -2,3 +2,7 @@ frontend/src/node_modules
 backend/src/node_modules
 old-scala/scala-frontend/node_modules
 old-scala/scala-backend/node_modules
+.agents
+.vscode
+old-scala
+PORT=3000

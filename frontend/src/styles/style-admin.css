@@ -1,4 +1,3 @@
-/* Reset de base para não herdar coisas ruins e manter isolado se precisar */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +10,7 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-image: url(/assets/bg-theme-blue.jpg); /* reaproveita bg */
+  background-image: url(/assets/bg-theme-blue.jpg); 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -19,7 +18,6 @@
   overflow: hidden;
 }
 
-/* Identidade visual - Logo no topo */
 .logo-iasd-admin img {
   position: fixed;
   top: 32px;
@@ -38,10 +36,23 @@
   border-radius: 50px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   backdrop-filter: blur(50px);
+  padding: 0 80px;
+  box-sizing: border-box;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.admin-card-content {
+  width: 100%;
+}
+
+.admin-label-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; /* replaced the margin-bottom from the labels directly */
 }
 
 .label {
@@ -54,8 +65,8 @@
   font-size: 100px;
   font-weight: 700;
   color: #000;
-  margin-bottom: 30px;
-  line-height: 1;
+  margin-bottom: 50px;
+  line-height: 0.8;
 }
 
 .label-sub {
@@ -64,23 +75,40 @@
   display: block;
 }
 
+.admin-mics-preview {
+  display: flex;
+  gap: 6px;
+}
+
+.mic-badge-small {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.mic-badge-small ion-icon {
+  font-size: 11px;
+  color: rgba(0,0,0,0.5);
+}
+
 #admin-proximo {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 20px;
-  line-height: 1;
+  margin-bottom: 16px;
+  line-height: 0.8;
 }
 
 #admin-terceiro {
-  font-size: 36px;
+  font-size: 48px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.5);
-  line-height: 1;
+  line-height: 0.8;
 }
-
-
-/* Formas geométricas (Corner buttons) */
 
 .control-left, .control-right {
   position: fixed;
@@ -124,7 +152,6 @@
   color: #000;
 }
 
-/* Central Controls (Clock + Menu) */
 .control-center {
   position: fixed;
   bottom: 40px;
@@ -143,15 +170,11 @@
   color: #111;
 }
 
-/* Hamburger Toggle & Button */
-#admin-menu-toggle {
-  display: none;
-}
-
 #admin-menu-btn {
   width: 56px;
   height: 56px;
   border-radius: 50%;
+  border: none;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -167,14 +190,14 @@
   color: #000;
 }
 
-/* Overlay & Panel for Menu */
+/* Fundo desfocado ao clicar no menu */
 #admin-overlay {
   position: fixed;
   inset: 0;
-  display: none;
-  background: rgba(0, 0, 0, 0.2); /* Pouco mais escuro */
-  backdrop-filter: blur(15px);   /* Blur forte pra focar só no menu */
-  z-index: 999;                  /* Acima de tudo (botões, logo, card central) */
+  display: block;
+  background: rgba(0, 0, 0, 0.2); 
+  backdrop-filter: blur(5px);   
+  z-index: 999;                  
 }
 
 #admin-menu-panel {
@@ -217,7 +240,128 @@
   border-color: #28A0F6;
 }
 
-#admin-menu-panel button {
+/* Tabs do Menu */
+.menu-tabs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #28A0F6;
+  background: transparent;
+  color: #28A0F6;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.tab-btn.active {
+  background: #28A0F6;
+  color: #fff;
+}
+
+/* Configurações de Microfone */
+.mics-config-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.mics-config-group select {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.mics-selection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.mics-selection-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mics-selection-list::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+
+.mics-selection-list::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+.mics-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brand-name {
+  font-size: 10px;
+  color: #666;
+}
+
+.color-row {
+  display: flex;
+  gap: 10px;
+}
+
+.mic-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+}
+
+.mic-slot-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+.color-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-circle.selected {
+  border-color: #333;
+  transform: scale(1.1);
+}
+
+.color-circle:active {
+  transform: scale(0.9);
+}
+
+.save-btn {
   padding: 14px;
   background: #28A0F6;
   color: #fff;
@@ -227,19 +371,146 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  width: 100%;
 }
 
-#admin-menu-panel button:hover {
+.save-btn:hover {
   background: #1B86D1;
 }
 
-/* Toggle interactions */
-#admin-menu-toggle:checked ~ #admin-menu-panel {
+#admin-menu-panel.open {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
 }
 
-#admin-menu-toggle:checked ~ #admin-overlay {
-  display: block;
+/* ------------------------------------- */
+/* Responsividade */
+/* ------------------------------------- */
+
+/* Tablets */
+@media (max-width: 1200px) {
+  #admin-card {
+    width: 85vw;
+    max-width: 1000px;
+    height: auto;
+    min-height: 450px;
+    padding: 50px 60px;
+    border-radius: 40px;
+  }
+
+  #admin-atual {
+    font-size: 80px;
+    line-height: 1.1;
+    margin-bottom: 40px;
+  }
+
+  #admin-proximo, #admin-terceiro {
+    font-size: 36px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .admin-label-group {
+    margin-bottom: 10px;
+  }
+
+  .control-left, .control-right {
+    width: 180px;
+    height: 180px;
+  }
+
+  .control-left ion-icon, .control-right ion-icon {
+    font-size: 40px;
+    bottom: 35px;
+  }
+
+  .control-left ion-icon { left: 35px; }
+  .control-right ion-icon { right: 35px; }
+}
+
+/* Celulares */
+@media (max-width: 768px) {
+  #admin-container {
+    overflow-y: auto; 
+  }
+
+  #admin-card {
+    width: 92vw;
+    padding: 30px 20px;
+    border-radius: 25px;
+    height: auto;
+    margin-top: 10px; 
+  }
+
+  #admin-atual {
+    font-size: 32px; /* Reduzido para caber melhor */
+    margin-bottom: 15px;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  #admin-proximo, #admin-terceiro {
+    font-size: 18px; /* Reduzido para evitar amontoamento */
+    margin-bottom: 8px;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .admin-label-group {
+    flex-wrap: wrap; 
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .label, .label-sub {
+    font-size: 14px;
+  }
+
+  .logo-iasd-admin img {
+    width: 40px;
+    height: 40px;
+    top: 15px;
+  }
+
+  .control-left, .control-right {
+    width: 70px;
+    height: 70px;
+    opacity: 0.8;
+  }
+
+  .control-left ion-icon, .control-right ion-icon {
+    font-size: 20px;
+    bottom: 15px;
+  }
+
+  .control-left ion-icon { left: 15px; }
+  .control-right ion-icon { right: 15px; }
+
+  .clock {
+    font-size: 18px;
+  }
+
+  .control-center {
+    bottom: 15px;
+    gap: 6px;
+  }
+
+  #admin-menu-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  #admin-menu-panel {
+    width: 95vw;
+    bottom: 70px;
+    padding: 16px;
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+
+  .save-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
 }

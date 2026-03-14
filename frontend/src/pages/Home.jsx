@@ -1,37 +1,48 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { io } from "socket.io-client";
 import TransitionText from "../components/TransitionText";
 
 export default function Home() {
   const [atual, setAtual] = useState("...");
   const [proximo, setProximo] = useState("...");
   const [terceiro, setTerceiro] = useState("...");
+  const [mics, setMics] = useState([]);
   const [online, setOnline] = useState(false);
   const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  function autoAtt() {
-    fetch("http://localhost:3000/hub")
-      .then(response => response.json())
-      .then(data => {
-        console.log("Buscando dados da rota /hub...");
-        setOnline(true);
-        setAtual(data.atual);
-        setProximo(data.proximo);
-        setTerceiro(data.proximos);
-      })
-      .catch(error => {
-        console.error("Erro ao buscar dados:", error);
-        setOnline(false);
-      });
-  }
-
   useEffect(() => {
-    autoAtt(); // roda quando abre a página
-    const interval = setInterval(autoAtt, 3000); // atualiza a cada 3s
     document.title = "Hub - IASD";
-    return () => clearInterval(interval); // limpa o intervalo ao sair da página
+
+    // Conecta ao servidor WebSocket usando o IP que acessou a página
+    const socket = io(`http://${window.location.hostname}:3000`); //permite que eu consiga entrar e acessar de outro dispositivo
+
+    socket.on("connect", () => {
+      console.log("Conectado no servidor");
+      setOnline(true);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Desconectado do servidor");
+      setOnline(false);
+    });
+
+    // Ouve as atualizações do painel em tempo real
+    socket.on("update-hub", (data) => {
+      setAtual(data.atual);
+      setProximo(data.proximo);
+      setTerceiro(data.proximos);
+      if (data.microfones) {
+        setMics(data.microfones);
+      }
+    });
+
+    // Limpa a conexão ao destruir o componente
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -39,7 +50,16 @@ export default function Home() {
       <div id="container">
         <div id="container-children">
           <div id="content-container-children">
-            <span id="atual">Atualmente:</span>
+            <div className="atual-header">
+              <span id="atual">Atualmente:</span>
+              <div className="mics-display">
+                {mics.map((color, idx) => (
+                  <div key={idx} className="mic-badge" style={{ backgroundColor: color }}>
+                    {color && <ion-icon name="radio-outline"></ion-icon>}
+                  </div>
+                ))}
+              </div>
+            </div>
             <TransitionText as="h1" id="atual-nome" text={atual} />
 
             <span id="proximo">Próximo será:</span>

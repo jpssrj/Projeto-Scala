@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "_coment": "usei o --host para poder conectar de outros dispositivos",
+    "dev": "vite --host", 
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,7 +14,8 @@
     "axios": "^1.13.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "socket.io-client": "^4.8.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
