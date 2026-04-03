@@ -9,7 +9,7 @@
 }
 
 body {
-    background-image: url(assets/bg-theme-blue.jpg);
+    background-image: url(/assets/bg-theme-blue.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     background-clip: border-box;
