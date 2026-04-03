@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
 export default function Admin() {
+  const API_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
   const [atual, setAtual] = useState("Carregando...");
   const [proximo, setProximo] = useState("...");
   const [terceiro, setTerceiro] = useState("...");
@@ -32,7 +33,10 @@ export default function Admin() {
 
   // WebSockets para sincronizar estado
   useEffect(() => {
-    const socket = io(`http://${window.location.hostname}:3000`);//permite que eu consiga acessar de outro dispositivo
+    // Se houver uma URL de API definida no ambiente (Vercel), usa ela. 
+    // Caso contrário, usa o IP local (para testes em casa/celular).
+    const API_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+    const socket = io(API_URL);//permite que eu consiga acessar de outro dispositivo
 
     socket.on("connect", () => {
       console.log("Admin conectado ao Servidor");
@@ -66,7 +70,7 @@ export default function Admin() {
     if (loading) return;
     setLoading(true);
 
-    fetch(`http://${window.location.hostname}:3000/avancar`, { method: "POST" })
+    fetch(`${API_URL}/avancar`, { method: "POST" })
       .catch(() => alert("⚠️ Erro ao avançar momento"))
       .finally(() => setLoading(false));
   }
@@ -76,7 +80,7 @@ export default function Admin() {
     if (loading) return;
     setLoading(true);
 
-    fetch(`http://${window.location.hostname}:3000/voltar`, { method: "POST" })
+    fetch(`${API_URL}/voltar`, { method: "POST" })
       .catch(() => alert("⚠️ Erro ao voltar momento"))
       .finally(() => setLoading(false));
   }
@@ -88,7 +92,7 @@ export default function Admin() {
       .map(l => l.trim())
       .filter(l => l !== "");
 
-    fetch(`http://${window.location.hostname}:3000/culto`, {
+    fetch(`${API_URL}/culto`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ momentos })
@@ -105,7 +109,7 @@ export default function Admin() {
 
   // 🎤 salvar configurações de microfones
   function salvarMicrofones() {
-    fetch(`http://${window.location.hostname}:3000/microfones`, {
+    fetch(`${API_URL}/microfones`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mics: micsArray.slice(0, micsCount) })

@@ -13,20 +13,19 @@ const io = new Server(httpServer, {
   }
 });
 
-app.use(cors());
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
+app.use(cors({
+  origin: "*", 
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
+app.use(express.json());
 app.use("/users", userRoutes);
 
-httpServer.listen(3000, "0.0.0.0", () => {
-  console.log(`Servidor rodando no IPs da Rede na porta 3000`); //faz com que eu consiga acessar de outro dispositivo
-});
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 // Controle do avanço

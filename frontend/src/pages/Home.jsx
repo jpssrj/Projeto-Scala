@@ -16,8 +16,8 @@ export default function Home() {
   useEffect(() => {
     document.title = "Hub - IASD";
 
-    // Conecta ao servidor WebSocket usando o IP que acessou a página
-    const socket = io(`http://${window.location.hostname}:3000`); //permite que eu consiga entrar e acessar de outro dispositivo
+    const API_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000`;
+    const socket = io(API_URL); //permite que eu consiga entrar e acessar de outro dispositivo
 
     socket.on("connect", () => {
       console.log("Conectado no servidor");
