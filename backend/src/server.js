@@ -15,8 +15,14 @@ const io = new Server(httpServer, {
 
 const PORT = process.env.PORT || 3000;
 
+// Configuração de CORS - Permitir Localhost e opcionalmente o domínio da Vercel via ENV
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 app.use(cors({
-  origin: "*", 
+  origin: allowedOrigins,
   methods: ["GET", "POST"],
   credentials: true
 }));
